@@ -1,7 +1,5 @@
 package chess;
 
-import chess.model.Game;
-
 public class Main {
   /**
    * Entry point into the program

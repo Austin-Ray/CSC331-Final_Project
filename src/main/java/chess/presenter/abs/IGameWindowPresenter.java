@@ -21,7 +21,7 @@ public interface IGameWindowPresenter {
      * @param pointB        New point
      * @param chessPieceId  ID of chess piece
      */
-    void pieceMoved(int[][] pointA, int[][] pointB, int chessPieceId);
+    void pieceMoved(int[] pointA, int[] pointB, int chessPieceId);
 
     /**
      * Passes an updated gameboard to the GameWindow to draw.
@@ -34,5 +34,5 @@ public interface IGameWindowPresenter {
      * @param point             Point where chess piece is located
      * @param chessPieceId      Id of chess piece
      */
-    void requestValidMoves(int[][] point, int chessPieceId);
+    void requestValidMoves(int[] point, int chessPieceId);
 }

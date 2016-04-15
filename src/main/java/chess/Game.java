@@ -1,5 +1,6 @@
-package chess.model;
+package chess;
 
+import chess.model.GameManager;
 import chess.model.abs.IGame;
 import chess.model.abs.IGameManager;
 import chess.presenter.GameWindowPresenter;
@@ -9,8 +10,8 @@ import chess.view.abs.IGameWindow;
 
 public class Game implements IGame {
 
-  private boolean ready;
   IGameManager manager;
+  IGameWindow window;
 
   /**
    * Default constructor
@@ -22,13 +23,10 @@ public class Game implements IGame {
 
     // Creates the GameManager and GameWindow
     manager = new GameManager(presenter);
-    IGameWindow window = new GameWindow(presenter);
+    window = new GameWindow(presenter);
 
     // Registers GameManager and GameWindow with GamePresenter.
     presenter.register(manager, window);
-
-    // Initialization is complete.
-    ready = true;
   }
 
   /**
@@ -36,7 +34,7 @@ public class Game implements IGame {
    */
   @Override
   public void run() {
-
+    manager.start();
   }
 
   /**
@@ -44,6 +42,6 @@ public class Game implements IGame {
    */
   @Override
   public boolean isReady() {
-    return ready;
+    return manager != null && window != null;
   }
 }
