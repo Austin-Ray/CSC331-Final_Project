@@ -8,11 +8,20 @@ import static org.junit.Assert.*;
  * Tests the Translate class' to convert between (x,y) coordinates and chess position names.
  */
 public class TranslateTest {
+
+  /**
+   * Tests the ability of the translator to convert from XY-coordinates to block name
+   * @throws Exception    Throw an exception if test fails
+   */
   @Test
   public void fromCoordToName() throws Exception {
     assertTrue(Translate.fromCoordToName(new int[]{0, 0}).equalsIgnoreCase("A1"));
   }
 
+  /**
+   * Tests the ability of the translator to convert from block name to XY-coordinates
+   * @throws Exception    Throw an exception if the test fails.
+   */
   @Test
   public void fromNameToCoord() throws Exception {
     int[] testCoords = new int[]{0, 0};

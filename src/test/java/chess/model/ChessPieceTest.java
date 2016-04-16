@@ -9,20 +9,24 @@ import static org.junit.Assert.*;
  * Tests the ChessPiece class' ability to process a chess pieces ID to get color and type.
  */
 public class ChessPieceTest {
-  ChessPiece whitePawn = new ChessPiece(10);
-  ChessPiece whiteRook = new ChessPiece(11);
-  ChessPiece whiteBishop = new ChessPiece(12);
-  ChessPiece whiteKnight = new ChessPiece(13);
-  ChessPiece whiteQueen = new ChessPiece(14);
-  ChessPiece whiteKing = new ChessPiece(15);
+  private ChessPiece whitePawn = new ChessPiece(10);
+  private ChessPiece whiteRook = new ChessPiece(11);
+  private ChessPiece whiteBishop = new ChessPiece(12);
+  private ChessPiece whiteKnight = new ChessPiece(13);
+  private ChessPiece whiteQueen = new ChessPiece(14);
+  private ChessPiece whiteKing = new ChessPiece(15);
 
-  ChessPiece blackPawn = new ChessPiece(20);
-  ChessPiece blackRook = new ChessPiece(21);
-  ChessPiece blackBishop = new ChessPiece(22);
-  ChessPiece blackKnight = new ChessPiece(23);
-  ChessPiece blackQueen = new ChessPiece(24);
-  ChessPiece blackKing = new ChessPiece(25);
+  private ChessPiece blackPawn = new ChessPiece(20);
+  private ChessPiece blackRook = new ChessPiece(21);
+  private ChessPiece blackBishop = new ChessPiece(22);
+  private ChessPiece blackKnight = new ChessPiece(23);
+  private ChessPiece blackQueen = new ChessPiece(24);
+  private ChessPiece blackKing = new ChessPiece(25);
 
+  /**
+   * Tests the getType() method of the ChessPiece class
+   * @throws Exception    Throw an exception if test fails.
+   */
   @Test
   public void getType() throws Exception {
     // Test the white pieces' type
@@ -42,6 +46,10 @@ public class ChessPieceTest {
     assertEquals(ChessPiece.Type.KING, blackKing.getType());
   }
 
+  /**
+   * Tests the getPieceColor() method of the ChessPiece class
+   * @throws Exception    Throw an exception if test fails.
+   */
   @Test
   public void getPieceColor() throws Exception {
     // Test the white pieces' color

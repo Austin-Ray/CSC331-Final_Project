@@ -9,6 +9,7 @@ public class Main {
   public static void main(String[] args) {
     Game game = new Game();
 
+    // If the game is ready, run it. Otherwise notify that there is an issue with initialization.
     if(game.isReady()) {
       game.run();
     } else {

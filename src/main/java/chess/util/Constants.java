@@ -1,5 +1,8 @@
 package chess.util;
 
+/**
+ * Class containing helpful constants.
+ */
 public class Constants {
   public static int BOARD_HEIGHT = 8;
   public static int BOARD_WIDTH = 8;
