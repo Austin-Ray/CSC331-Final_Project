@@ -1,91 +1,44 @@
 package chess.util;
 
-import java.awt.Color;
+import chess.model.Move;
+import chess.util.generator.*;
+import chess.util.generator.abs.IMoveGenerator;
 
 /**
  * Helper class that generates the valid moves based on the current board state and piece position.
  */
 public class ValidMoveGenerator {
-  /**
-   * Generates the valid move board for a pawn
-   * @param pieceColor    Color of the piece
-   * @param board         Current board state
-   * @return              Valid move array
-   */
-  public static int[][] generatePawnMoves(Color pieceColor, int[][] board) {
+
+  public static int[][] generateMoves(Move move, int[][] board) {
+    IMoveGenerator generator = null;
+
+    // Create a blank board
     int[][] validMoves = new int[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
 
-    // TODO: Add implementation
+    switch(move.getPieceType()) {
+      case PAWN:
+        generator = new PawnMoveGenerator(move, board);
+        break;
+      case ROOK:
+        generator = new RookMoveGenerator(move, board);
+        break;
+      case BISHOP:
+        generator  = new BishopMoveGenerator(move, board);
+        break;
+      case KNIGHT:
+        generator = new KnightMoveGenerator(move, board);
+        break;
+      case QUEEN:
+        generator = new QueenMoveGenerator(move, board);
+        break;
+      case KING:
+        generator = new KingMoveGenerator(move, board);
+        break;
+    }
 
-    return validMoves;
-  }
-
-  /**
-   * Generates the valid move board for a rook
-   * @param pieceColor    Color of the piece
-   * @param board         Current board state
-   * @return              Valid move array
-   */
-  public static int[][] generateRookMoves(Color pieceColor, int[][] board) {
-    int[][] validMoves = new int[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
-
-    // TODO: Add implementation.
-
-    return validMoves;
-  }
-
-  /**
-   * Generates the valid move board for a bishop
-   * @param pieceColor    Color of the piece
-   * @param board         Current board state
-   * @return              Valid move array
-   */
-  public static int[][] generateBishopMoves(Color pieceColor, int[][] board) {
-    int[][] validMoves = new int[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
-
-    // TODO: Add implementation.
-
-    return validMoves;
-  }
-
-  /**
-   * Generates the valid move board for a knight
-   * @param pieceColor    Color of the piece
-   * @param board         Current board state
-   * @return              Valid move array
-   */
-  public static int[][] generateKnightMoves(Color pieceColor, int[][] board) {
-    int[][] validMoves = new int[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
-
-    // TODO: Add implementation.
-
-    return validMoves;
-  }
-
-  /**
-   * Generates the valid move board for a queen
-   * @param pieceColor    Color of the piece
-   * @param board         Current board state
-   * @return              Valid move array
-   */
-  public static int[][] generateQueenMoves(Color pieceColor, int[][] board) {
-    int[][] validMoves = new int[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
-
-    // TODO: Add implementation.
-
-    return validMoves;
-  }
-
-  /**
-   * Generates the valid move board for a king
-   * @param pieceColor    Color of the piece
-   * @param board         Current board state
-   * @return              Valid move array
-   */
-  public static int[][] generateKingMoves(Color pieceColor, int[][] board) {
-    int[][] validMoves = new int[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
-
-    // TODO: Add implementation.
+    if(generator != null) {
+      validMoves = generator.generateValidMoves();
+    }
 
     return validMoves;
   }

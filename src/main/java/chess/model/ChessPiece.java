@@ -10,6 +10,7 @@ public class ChessPiece {
       NONE, PAWN, ROOK, BISHOP, KNIGHT, QUEEN, KING
   }
 
+  private int id;
   private Type type;
   private Color pieceColor;
 
@@ -18,6 +19,7 @@ public class ChessPiece {
    * @param chessPieceId      ID of a chess piece.
    */
   public ChessPiece(int chessPieceId) {
+    this.id = chessPieceId;
     processId(chessPieceId);
   }
 
@@ -57,6 +59,14 @@ public class ChessPiece {
       default:
         type = Type.NONE;  // Should never happen
     }
+  }
+
+  /**
+   * Gets and returns the chess piece Id
+   * @return  ID of chess piece
+     */
+  public int getId() {
+    return id;
   }
 
   /**

@@ -59,11 +59,11 @@ public class GameManager implements IGameManager {
    * {@inheritDoc}
    */
   @Override
-  public void validateMove(int[] pointA, int[] pointB, int chessPieceId) {
+  public void validateMove(Move move) {
     // Checks if the move is valid.
     // If it is, update the board. Otherwise, do not modify board.
-    if(MoveValidator.isMoveValid(pointB, getValidMoves(pointA, chessPieceId))) {
-      movePiece(pointA, pointB, chessPieceId);
+    if(MoveValidator.isMoveValid(move.getPointB(), getValidMoves(move))) {
+      movePiece(move);
     }
 
     // Tell the presenter to update the GameWindow.
@@ -71,57 +71,30 @@ public class GameManager implements IGameManager {
   }
 
   /**
-   * Updates the gameboard when a valid move is played.
-   * @param pointA          Origin point
-   * @param pointB          Destination point
-   * @param chessPieceId    ID of the chess piece
+   * Updates the game board when a valid move is played.
+   * @param move    Move object containing all information about a move
    */
-  private void movePiece(int[] pointA, int[] pointB, int chessPieceId) {
+  private void movePiece(Move move) {
     // Break the points into their X and Y coordinates.
+    int[] pointA = move.getPointA();
     int originX = pointA[0];
     int originY = pointA[1];
 
+    int[] pointB = move.getPointB();
     int newX = pointB[0];
     int newY = pointB[1];
 
     // Place a zero where the piece was, and put the piece ID at the new location.
     board[originY][originX] = 0;
-    board[newY][newX] = chessPieceId;
+    board[newY][newX] = move.getPieceId();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public int[][] getValidMoves(int[] point, int chessPieceId) {
-    int[][] validMoves;
-
-    ChessPiece piece = new ChessPiece(chessPieceId);
-
-    switch(piece.getType()) {
-      case PAWN:
-        validMoves = ValidMoveGenerator.generatePawnMoves(piece.getPieceColor(), board);
-        break;
-      case ROOK:
-        validMoves = ValidMoveGenerator.generateRookMoves(piece.getPieceColor(), board);
-        break;
-      case BISHOP:
-        validMoves  = ValidMoveGenerator.generateBishopMoves(piece.getPieceColor(), board);
-        break;
-      case KNIGHT:
-        validMoves = ValidMoveGenerator.generateKnightMoves(piece.getPieceColor(), board);
-        break;
-      case QUEEN:
-        validMoves = ValidMoveGenerator.generateQueenMoves(piece.getPieceColor(), board);
-        break;
-      case KING:
-        validMoves = ValidMoveGenerator.generateKingMoves(piece.getPieceColor(), board);
-        break;
-      default:
-        validMoves = new int[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
-    }
-
-    return validMoves;
+  public int[][] getValidMoves(Move move) {
+    return ValidMoveGenerator.generateMoves(move, board);
   }
 
   /**

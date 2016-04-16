@@ -1,5 +1,7 @@
 package chess.model.abs;
 
+import chess.model.Move;
+
 /**
  * Interface that every GameManager must implement.
  */
@@ -11,17 +13,14 @@ public interface IGameManager {
 
   /**
    * Validates a move. If not valid, just send back the same board as before.
-   * @param pointA        Origin point
-   * @param pointB        New point
-   * @param chessPieceId  ID of chess piece
+   * @param move    Move object containing all relevant information.
    */
-  void validateMove(int[] pointA, int[] pointB, int chessPieceId);
+  void validateMove(Move move);
 
   /**
    * Returns an array of the game board that only lists valid moves.
-   * @param point             Point where piece is located.
-   * @param chessPieceId      Chess piece's id
-   * @return                  Array of valid moves for the piece
+   * @param move    Move object
+   * @return        Array of valid moves for the piece
    */
-  int[][] getValidMoves(int[] point, int chessPieceId);
+  int[][] getValidMoves(Move move);
 }
