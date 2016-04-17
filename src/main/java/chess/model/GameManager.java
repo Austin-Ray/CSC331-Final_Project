@@ -65,6 +65,8 @@ public class GameManager implements IGameManager {
     if(MoveValidator.isMoveValid(move.getPointB(), getValidMoves(move))) {
       movePiece(move);
     }
+    
+    //Test Commit
 
     // Tell the presenter to update the GameWindow.
     presenter.updateBoard(board);
