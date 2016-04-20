@@ -14,10 +14,6 @@ public class MoveValidator {
 
     // Checks if the validMoves array has 1 at the point.
     // If so, move is valid. Otherwise, return false.
-    if(validMoves[y][x] == 1) {
-      return true;
-    }
-
-    return false;
+    return validMoves[y][x] == 1;
   }
 }
