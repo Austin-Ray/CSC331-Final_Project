@@ -13,6 +13,9 @@ public class GameManager implements IGameManager {
   private IGameWindowPresenter presenter;
 
   private int[][] board;
+  private int turn;
+
+  private boolean ready;
 
   /**
    * Parameterized constructor that allows specification of IGameWindowPresenter instance.
@@ -21,6 +24,8 @@ public class GameManager implements IGameManager {
   public GameManager(IGameWindowPresenter presenter) {
     this.presenter = presenter;
     initializeBoard();
+    turn = 0;
+    ready = false;
   }
 
   /**
@@ -52,7 +57,7 @@ public class GameManager implements IGameManager {
    * {@inheritDoc}
    */
   @Override public void start() {
-
+    ready = true;
   }
 
   /**
@@ -87,6 +92,16 @@ public class GameManager implements IGameManager {
     // Place a zero where the piece was, and put the piece ID at the new location.
     board[originY][originX] = 0;
     board[newY][newX] = move.getPieceId();
+
+    // Change the turn to the other player
+    switch(turn) {
+      case 0:
+        turn = 1;
+        break;
+      case 1:
+        turn = 0;
+        break;
+    }
   }
 
   /**
@@ -94,7 +109,7 @@ public class GameManager implements IGameManager {
    */
   @Override
   public int[][] getValidMoves(Move move) {
-    return ValidMoveGenerator.generateMoves(move, board);
+    return ValidMoveGenerator.generateMoves(move, board, turn);
   }
 
   /**

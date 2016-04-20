@@ -28,7 +28,7 @@ public class GameWindow implements IGameWindow {
      * {@inheritDoc}
      */
     @Override
-    public void pieceSelected(int[][] point) {
+    public void pieceSelected(int[] point) {
 
     }
 
@@ -36,7 +36,14 @@ public class GameWindow implements IGameWindow {
      * {@inheritDoc}
      */
     @Override
-    public void piecePlaced(int[][] point) {
+    public void piecePlaced(int[] point) {
+
+    }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override public void updateBoard(int[][] newBoard) {
 
     }
 }
