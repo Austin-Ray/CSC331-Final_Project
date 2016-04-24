@@ -1,15 +1,14 @@
 package chess.util.generator;
 
 import chess.model.Move;
+import chess.util.ArrayUtil;
 import chess.util.generator.abs.IMoveGenerator;
 
 /**
  * Move generator for a Queen piece
  */
-public class QueenMoveGenerator implements IMoveGenerator {
+public class QueenMoveGenerator extends Generator implements IMoveGenerator {
 
-    private int[][] board;
-    private Move move;
 
     /**
      * Parameterized constructor taking a Move object and the current state of the game board.
@@ -17,8 +16,7 @@ public class QueenMoveGenerator implements IMoveGenerator {
      * @param board     Current state of the board
      */
     public QueenMoveGenerator(Move move, int[][] board) {
-        this.board = board;
-        this.move = move;
+        super(move, board);
     }
 
     /**
@@ -26,6 +24,9 @@ public class QueenMoveGenerator implements IMoveGenerator {
      */
     @Override
     public int[][] generateValidMoves() {
-        return new int[0][];
+        int[][] rookArray = new RookMoveGenerator(move, board).generateValidMoves();
+        int[][] bishopArray = new BishopMoveGenerator(move, board).generateValidMoves();
+
+        return ArrayUtil.combineArray(rookArray, bishopArray);
     }
 }
