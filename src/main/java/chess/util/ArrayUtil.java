@@ -1,8 +1,16 @@
 package chess.util;
 
+/**
+ * Helper class for array manipulation
+ */
 public class ArrayUtil {
-
-
+  /**
+   * Overlay one array on top of another
+   * @param point       Point that needs the overlay on
+   * @param base        Base array
+   * @param overlay     Overlay array
+   * @return            Base array with overlay
+   */
   public static int[][] overlayArray(int[] point, int[][] base, int[][] overlay) {
     int xCoord = point[0];
     int yCoord = point[1];
@@ -14,14 +22,8 @@ public class ArrayUtil {
     int distanceTop = translateValue(findDistanceTop(yCoord, distanceFromCenter), overlay.length);
     int distanceBottom = translateValue(findDistanceFromBottom(yCoord, distanceFromCenter), overlay.length);
 
-
-    //System.out.format("distanceLeft: %d, distanceRight %d, distanceTop: %d, distanceBottom: %d\n", distanceLeft, distanceRight, distanceTop, distanceBottom);
     for(int i = (distanceFromCenter) - distanceTop; i < overlay.length && i + distanceBottom < Constants.BOARD_HEIGHT; i++) {
-      //System.out.format("Y=%d\n", i);
       for(int j = (distanceFromCenter) - distanceLeft; j < overlay.length && j + distanceRight <= Constants.BOARD_WIDTH; j++) {
-        //System.out.format("Value %d at X=%d, Y=%d\n", base[i][j], j, i);
-        //System.out.format("YCoord + i - distanceFromCenter: %d\n", yCoord + i - distanceFromCenter) ;
-        //System.out.format("XCoord + i - distanceFromCenter: %d\n", xCoord + j - distanceFromCenter) ;
 
         if(!(xCoord + j - distanceFromCenter >= Constants.BOARD_WIDTH || yCoord + i - distanceFromCenter >= Constants.BOARD_HEIGHT)) {
           base[yCoord + i - distanceFromCenter][xCoord + j - distanceFromCenter] = overlay[i][j];
@@ -32,22 +34,52 @@ public class ArrayUtil {
     return base;
   }
 
-  static int findDistanceLeft(int x, int distanceFromCenter) {
+  /**
+   * Find the distance from the left
+   * @param x                     X coordinate
+   * @param distanceFromCenter    Distance from the center of the overlay
+   * @return                      Distance between X coordinate and array bounds
+   */
+  private static int findDistanceLeft(int x, int distanceFromCenter) {
     return x - distanceFromCenter;
   }
 
-  static int findDistanceTop(int y, int distanceFromCenter) {
+  /**
+   * Finds the distance from the top of the array
+   * @param y                     Y coordinate
+   * @param distanceFromCenter    Distance from center of overlay
+   * @return                      Distance from the top of the array bounds
+   */
+  private static int findDistanceTop(int y, int distanceFromCenter) {
     return y - distanceFromCenter;
   }
 
-  static int findDistanceRight(int x, int distanceFromCenter) {
+  /**
+   * Finds the distance from the right bound of the array
+   * @param x                     X coordinate
+   * @param distanceFromCenter    Distance from the center of the overlay.
+   * @return                      Distance from the right bound of the array.
+   */
+  private static int findDistanceRight(int x, int distanceFromCenter) {
     return -1 * (x + distanceFromCenter) + Constants.BOARD_WIDTH;
   }
 
-  static int findDistanceFromBottom(int y, int distanceFromCenter) {
+  /**
+   * Finds the distance from the bottom of the array.
+   * @param y                     Y coordinate
+   * @param distanceFromCenter    Distance from the center of the overlay array
+   * @return                      Distance from the bottom of the base array.
+   */
+  private static int findDistanceFromBottom(int y, int distanceFromCenter) {
     return -1 * (y + distanceFromCenter) + Constants.BOARD_HEIGHT;
   }
 
+  /**
+   * Translate a value from the base array to the proper overlay value
+   * @param n           Base Array value
+   * @param length      Length of the overlay array
+   * @return            Translated coordinate that works in the overlay
+   */
   private static int translateValue(int n, int length) {
     if(n == 0) {
       return length / 2;
@@ -62,6 +94,12 @@ public class ArrayUtil {
     return length / 2;
   }
 
+  /**
+   * Combine two arrays. Overlays one values into another.
+   * @param array1    First array
+   * @param array2    Second array
+   * @return          Combined array
+   */
   public static int[][] combineArray(int[][] array1, int[][] array2) {
     int[][] newArray = new int[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
 

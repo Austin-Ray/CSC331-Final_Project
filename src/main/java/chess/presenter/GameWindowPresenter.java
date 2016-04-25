@@ -12,13 +12,15 @@ public class GameWindowPresenter implements IGameWindowPresenter {
   private IGameManager manager;
   private IGameWindow window;
 
+  /**
+   * Default constructor. Useless
+   */
   public GameWindowPresenter() {}
 
   /**
    * {@inheritDoc}
    */
-  @Override
-  public void register(IGameManager manager, IGameWindow window) {
+  @Override public void register(IGameManager manager, IGameWindow window) {
     this.manager = manager;
     this.window = window;
   }
@@ -26,8 +28,7 @@ public class GameWindowPresenter implements IGameWindowPresenter {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public void pieceMoved(int[] pointA, int[] pointB, int chessPieceId) {
+  @Override public void pieceMoved(int[] pointA, int[] pointB, int chessPieceId) {
     // Convert to the format the GameManager uses
     Move move = new Move(chessPieceId, pointA, pointB);
     manager.validateMove(move);
@@ -36,16 +37,14 @@ public class GameWindowPresenter implements IGameWindowPresenter {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public void updateBoard(int[][] newBoard) {
+  @Override public void updateBoard(int[][] newBoard) {
     window.updateBoard(newBoard);
   }
 
   /**
    * {@inheritDoc}
    */
-  @Override
-  public void requestValidMoves(int[] point, int chessPieceId) {
+  @Override public void requestValidMoves(int[] point, int chessPieceId) {
     // Convert to the format the GameManager uses
     Move move = new Move(chessPieceId, point, new int[]{0});
 
@@ -59,8 +58,26 @@ public class GameWindowPresenter implements IGameWindowPresenter {
   /**
    * {@inheritDoc}
    */
-  public void endGame(int[][] newBoard, int winner) {
+  public void endGame(int[][] newBoard, int turn) {
+    String winner, loser;
+
+    if(turn == 0) {
+      winner = "White";
+      loser = "Black";
+    } else {
+      winner = "Black";
+      loser = "White";
+    }
+
     window.updateBoard(newBoard);
-    window.endGame(winner);
+    window.endGame(winner, loser);
+  }
+
+  /**
+   * Notify the window that a turn has completed.
+   * @param turn    Turn number. 0 for white, 1 for black.
+   */
+  @Override public void turnComplete(int turn) {
+    window.turnComplete(turn);
   }
 }

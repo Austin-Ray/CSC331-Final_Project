@@ -22,8 +22,7 @@ public class KingMoveGenerator extends Generator implements IMoveGenerator {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public int[][] generateValidMoves() {
+  @Override public int[][] generateValidMoves() {
     int[][] overlay = {{1, 1, 1},
         {1, 0, 1},
         {1, 1, 1}};
@@ -31,12 +30,13 @@ public class KingMoveGenerator extends Generator implements IMoveGenerator {
     validMoves = ArrayUtil.overlayArray(move.getPointA(), validMoves, overlay);
 
     for(int i = 0; i < Constants.BOARD_HEIGHT; i++) {
-      for(int j = 0; j < Constants.BOARD_WIDTH; i++) {
+      for(int j = 0; j < Constants.BOARD_WIDTH; j++) {
         if(validMoves[i][j] == 1) {
-          shouldGeneratorStop(analyzePath(j, i), j, i);
+          checkOverlayWithBoard(j, i);
         }
       }
     }
-      return validMoves;
+
+    return validMoves;
   }
 }

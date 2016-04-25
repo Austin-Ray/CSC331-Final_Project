@@ -1,5 +1,8 @@
 package chess.model.abs;
 
+/**
+ * Abstract interface every game must implement.
+ */
 public interface IGame {
   /**
    * Runs the game instance.

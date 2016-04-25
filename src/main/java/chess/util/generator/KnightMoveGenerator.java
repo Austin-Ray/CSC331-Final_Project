@@ -10,35 +10,36 @@ import chess.util.generator.abs.IMoveGenerator;
  */
 public class KnightMoveGenerator extends Generator implements IMoveGenerator {
 
-    /**
-     * Parameterized constructor taking a Move object and the current state of the board.
-     * @param move      Move object
-     * @param board     Current state of the board
-     */
-    public KnightMoveGenerator(Move move, int[][] board) {
-        super(move, board);
-    }
+  /**
+   * Parameterized constructor taking a Move object and the current state of the board.
+   * @param move      Move object
+   * @param board     Current state of the board
+   */
+  public KnightMoveGenerator(Move move, int[][] board) {
+    super(move, board);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int[][] generateValidMoves() {
-        int[][] overlay = {{0, 1, 0, 1, 0},
-            {1, 0, 0, 0, 1},
-            {0, 0, 0, 0, 0},
-            {1, 0, 0, 0, 1},
-            {0, 1, 0, 1, 0}};
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int[][] generateValidMoves() {
+    int[][] overlay = {{0, 1, 0, 1, 0},
+        {1, 0, 0, 0, 1},
+        {0, 0, 0, 0, 0},
+        {1, 0, 0, 0, 1},
+        {0, 1, 0, 1, 0}};
 
-        validMoves = ArrayUtil.overlayArray(move.getPointA(), validMoves, overlay);
+    validMoves = ArrayUtil.overlayArray(move.getPointA(), validMoves, overlay);
 
-        for(int i = 0; i < Constants.BOARD_HEIGHT; i++) {
-            for(int j = 0; j < Constants.BOARD_WIDTH; i++) {
-                if(validMoves[i][j] == 1) {
-                    shouldGeneratorStop(analyzePath(j, i), j, i);
-                }
-            }
+    for(int i = 0; i < Constants.BOARD_HEIGHT; i++) {
+      for(int j = 0; j < Constants.BOARD_WIDTH; j++) {
+        if(validMoves[i][j] == 1) {
+          checkOverlayWithBoard(j, i);
         }
-        return validMoves;
+      }
     }
+
+    return validMoves;
+  }
 }

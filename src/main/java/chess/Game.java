@@ -8,16 +8,19 @@ import chess.presenter.abs.IGameWindowPresenter;
 import chess.view.GameWindow;
 import chess.view.abs.IGameWindow;
 
-public class Game implements IGame {
+/**
+ * Game class. Represents a came instance
+ */
+class Game implements IGame {
 
-  IGameManager manager;
-  IGameWindow window;
+  private final IGameManager manager;
+  private final IGameWindow window;
 
   /**
    * Default constructor
    * Initializes all required components of a Game instance
    */
-  public Game() {
+  Game() {
     // Creates the presenter
     IGameWindowPresenter presenter = new GameWindowPresenter();
 

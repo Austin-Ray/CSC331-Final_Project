@@ -21,15 +21,14 @@ public class BishopMoveGenerator extends Generator implements IMoveGenerator {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public int[][] generateValidMoves() {
+  @Override public int[][] generateValidMoves() {
     int[] point = move.getPointA();
     int x = point[0];
     int y = point[1];
 
     // Top Left Diagonal
-    for(int i = x; i >= 0; i--) {
-      for(int j = y; j >= 0 && isInBounds(i, 0, Constants.BOARD_WIDTH); j--) {
+    for(int i = x - 1; i >= 0; i--) {
+      for(int j = y - 1; j >= 0 && isInBounds(i); j--) {
         if(shouldGeneratorStop(analyzePath(i, j), i, j)) {
           i = -1;
           j = -1;
@@ -38,8 +37,8 @@ public class BishopMoveGenerator extends Generator implements IMoveGenerator {
       }
     }
     // Top Right Diagonal
-    for(int i = x; i < Constants.BOARD_WIDTH; i++) {
-      for(int j = y; j >= 0 && isInBounds(i, 0, Constants.BOARD_WIDTH); j--) {
+    for(int i = x + 1; i < Constants.BOARD_WIDTH; i++) {
+      for(int j = y - 1; j >= 0 && isInBounds(i); j--) {
         if(shouldGeneratorStop(analyzePath(i, j), i, j)) {
           i = 9;
           j = -1;
@@ -49,8 +48,8 @@ public class BishopMoveGenerator extends Generator implements IMoveGenerator {
     }
 
     // Bottom Left Diagonal
-    for(int i = x; i > 0; i--) {
-      for(int j = y; j < Constants.BOARD_HEIGHT && isInBounds(i, 0, Constants.BOARD_WIDTH); j++) {
+    for(int i = x - 1; i > 0; i--) {
+      for(int j = y + 1; j < Constants.BOARD_HEIGHT && isInBounds(i); j++) {
         if(shouldGeneratorStop(analyzePath(i, j), i, j)) {
           i = -1;
           j = 9;
@@ -60,8 +59,8 @@ public class BishopMoveGenerator extends Generator implements IMoveGenerator {
     }
 
     // Bottom Right Diagonal
-    for(int i = x; i < Constants.BOARD_WIDTH; i++) {
-      for(int j = y; j < Constants.BOARD_HEIGHT && isInBounds(i, 0, Constants.BOARD_WIDTH); j++) {
+    for(int i = x + 1; i < Constants.BOARD_WIDTH; i++) {
+      for(int j = y + 1; j < Constants.BOARD_HEIGHT && isInBounds(i); j++) {
         if(shouldGeneratorStop(analyzePath(i, j), i, j)) {
           i = 9;
           j = 9;
