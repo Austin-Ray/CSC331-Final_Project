@@ -31,7 +31,7 @@ class Generator {
    * @return                -1 to break, 1 if valid move, 2 if valid move and can attack
    */
   int analyzePath(int x, int y) {
-    if(x > 7 || y > 7) {
+    if(!(x >= 0 && x <= 7) || !(y >= 0 && y <= 7)) {
       return -1;
     }
 
@@ -73,15 +73,6 @@ class Generator {
     }
 
     return false;
-  }
-
-  /**
-   * Makes sure a number is bounded in the board array
-   * @param n   Number to be checked
-   * @return    True if number is bounded, false if not.
-   */
-  boolean isInBounds(int n) {
-    return 0 <= n && n < Constants.BOARD_WIDTH;
   }
 
   /**

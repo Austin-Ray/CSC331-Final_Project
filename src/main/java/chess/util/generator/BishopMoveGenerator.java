@@ -1,7 +1,6 @@
 package chess.util.generator;
 
 import chess.model.Move;
-import chess.util.Constants;
 import chess.util.generator.abs.IMoveGenerator;
 
 /**
@@ -27,43 +26,44 @@ public class BishopMoveGenerator extends Generator implements IMoveGenerator {
     int y = point[1];
 
     // Top Left Diagonal
-    for(int i = x - 1; i >= 0; i--) {
-      for(int j = y - 1; j >= 0 && isInBounds(i); j--) {
+    for(int i = x - 1; i > -2; i--) {
+      for(int j = y - 1; j > -2; j--) {
         if(shouldGeneratorStop(analyzePath(i, j), i, j)) {
           i = -1;
-          j = -1;
+          break;
         }
         i--;
       }
     }
+
     // Top Right Diagonal
-    for(int i = x + 1; i < Constants.BOARD_WIDTH; i++) {
-      for(int j = y - 1; j >= 0 && isInBounds(i); j--) {
+    for(int i = x + 1; i < 9; i++) {
+      for(int j = y - 1; j > -2 ; j--) {
         if(shouldGeneratorStop(analyzePath(i, j), i, j)) {
           i = 9;
-          j = -1;
+          break;
         }
         i++;
       }
     }
 
     // Bottom Left Diagonal
-    for(int i = x - 1; i > 0; i--) {
-      for(int j = y + 1; j < Constants.BOARD_HEIGHT && isInBounds(i); j++) {
+    for(int i = x - 1; i > -2; i--) {
+      for(int j = y + 1; j < 9 ; j++) {
         if(shouldGeneratorStop(analyzePath(i, j), i, j)) {
           i = -1;
-          j = 9;
+          break;
         }
         i--;
       }
     }
 
     // Bottom Right Diagonal
-    for(int i = x + 1; i < Constants.BOARD_WIDTH; i++) {
-      for(int j = y + 1; j < Constants.BOARD_HEIGHT && isInBounds(i); j++) {
+    outerloop:
+    for(int i = x + 1; i < 9; i++) {
+      for(int j = y + 1; j < 9 ; j++) {
         if(shouldGeneratorStop(analyzePath(i, j), i, j)) {
-          i = 9;
-          j = 9;
+          break outerloop;
         }
         i++;
       }
