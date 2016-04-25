@@ -22,10 +22,10 @@ public class ArrayUtilTest {
         {1, 0, 0, 0, 1},
         {0, 1, 0, 1, 0}};
 
-    int[] point = {0, 0};
+    int[] point = {7, 7};
 
-    //int[][] newArray = ArrayUtil.overlayArray(point, base, kingOverlay);
-    int[][] newArray = ArrayUtil.overlayArray(point, base, knightOverlay);
+    int[][] newArray = ArrayUtil.overlayArray(point, base, kingOverlay);
+    //int[][] newArray = ArrayUtil.overlayArray(point, base, knightOverlay);
 
     printArray(newArray);
 

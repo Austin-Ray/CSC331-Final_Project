@@ -29,22 +29,27 @@ public class PawnMoveGenerator extends Generator implements IMoveGenerator {
     int y = point[1];
 
     if(pieceColor == Color.WHITE) {
+      // Checks the position in front of the pawn.
       if(analyzePath(x, y + 1) == 1) {
         validMoves[y + 1][x] = 1;
       }
+      // Checks the right diagonal
       if(analyzePath(x + 1, y + 1) == 2) {
         validMoves[y + 1][x + 1] = 2;
       }
+      // Checks the left diagonal
       if(analyzePath(x - 1, y + 1) == 2) {
         validMoves[y + 1][x - 1] = 2;
       }
 
       if(y == 1) {
-        if(validMoves[y + 1][x] == 1 && analyzePath(x, y+ 2) == 1) {
+        // If in the starting position see if it can move the bonus move.
+        if(validMoves[y + 1][x] == 1 && analyzePath(x, y + 2) == 1) {
           validMoves[y + 1][x] = 1;
         }
       }
     } else {
+      // Exact mirror of the above code.
       if(analyzePath(x, y - 1) == 1) {
         validMoves[y - 1][x] = 1;
       }
