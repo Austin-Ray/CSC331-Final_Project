@@ -61,6 +61,7 @@ public class GameManager implements IGameManager {
    */
   @Override public void start() {
     ready = true;
+    presenter.updateBoard(board);
   }
 
   /**
