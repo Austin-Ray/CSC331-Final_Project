@@ -9,12 +9,12 @@ import java.awt.Color;
  */
 public class PawnMoveGenerator extends Generator implements IMoveGenerator {
 
-    /**
-     * Parameterized constructor taking a Move object and the current state of the gameboard
+  /**
+     * Parameterized constructor taking a Move object and the current state of the game board
      * @param move          Move object
      * @param gameboard     Current state of the gameboard
      */
-    public PawnMoveGenerator(Move move, int[][] gameboard) {
+  public PawnMoveGenerator(Move move, int[][] gameboard) {
         super(move, gameboard);
     }
 
@@ -28,7 +28,7 @@ public class PawnMoveGenerator extends Generator implements IMoveGenerator {
     int x = point[0];
     int y = point[1];
 
-    if(pieceColor == Color.WHITE) {
+    if(pieceColor == Color.BLACK) {
       // Checks the position in front of the pawn.
       if(analyzePath(x, y + 1) == 1) {
         validMoves[y + 1][x] = 1;
@@ -45,7 +45,7 @@ public class PawnMoveGenerator extends Generator implements IMoveGenerator {
       if(y == 1) {
         // If in the starting position see if it can move the bonus move.
         if(validMoves[y + 1][x] == 1 && analyzePath(x, y + 2) == 1) {
-          validMoves[y + 1][x] = 1;
+          validMoves[y + 2][x] = 1;
         }
       }
     } else {
@@ -61,7 +61,7 @@ public class PawnMoveGenerator extends Generator implements IMoveGenerator {
         validMoves[y - 1][x - 1] = 2;
       }
 
-      if(y == 7) {
+      if(y == 6) {
         if(validMoves[y - 1][x] == 1 && analyzePath(x, y - 2) == 1) {
           validMoves[y - 2][x] = 1;
         }

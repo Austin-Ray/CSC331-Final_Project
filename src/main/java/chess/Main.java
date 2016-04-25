@@ -1,5 +1,7 @@
 package chess;
 
+import chess.model.abs.IGame;
+
 public class Main {
   /**
    * Entry point into the program
@@ -7,7 +9,7 @@ public class Main {
    * @param args      Command line arguments
    */
   public static void main(String[] args) {
-    Game game = new Game();
+    IGame game = new Game();
 
     // If the game is ready, run it. Otherwise notify that there is an issue with initialization.
     if(game.isReady()) {

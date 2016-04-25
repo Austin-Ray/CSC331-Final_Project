@@ -6,9 +6,9 @@ import java.awt.*;
  * Helper class for holding move info.
  */
 public class Move {
-    private ChessPiece piece;
-    private int[] pointA;
-    private int[] pointB;
+    private final ChessPiece piece;
+    private final int[] pointA;
+    private final int[] pointB;
 
     /**
      * Parameterized constructor for packing all necessary pieces of info into class

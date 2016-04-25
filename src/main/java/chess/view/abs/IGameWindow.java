@@ -10,18 +10,6 @@ public interface IGameWindow {
      */
     void displayValidMoves(int[][] validMoveBoard);
 
-    /**
-     * Handles when a piece is selected.
-     * @param point     XY coordinates of a point
-     */
-    void pieceSelected(int[] point);
-
-    /**
-     * Handles when a piece is moved.
-     * @param point     XY coordinates of a point
-     */
-    void piecePlaced(int[] point);
-
   /**
    * Updates the game board to a new state
    * @param newBoard        New game board
@@ -32,5 +20,10 @@ public interface IGameWindow {
    * Ends the game
    * @param winner    0 if white, 1 if black
    */
-  void endGame(int winner);
+  void endGame(String winner, String loser);
+
+  /**
+   * Tells the GameWindow the turn is complete.
+   */
+  void turnComplete(int turn);
 }

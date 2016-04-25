@@ -2,15 +2,18 @@ package chess.model;
 
 import java.awt.*;
 
+/**
+ * Data object for holding information about a chess piece
+ */
 public class ChessPiece {
   /**
    * Type of chess piece.
    */
   public enum Type {
-      NONE, PAWN, ROOK, BISHOP, KNIGHT, QUEEN, KING
+    NONE, PAWN, ROOK, BISHOP, KNIGHT, QUEEN, KING
   }
 
-  private int id;
+  private final int id;
   private Type type;
   private Color pieceColor;
 

@@ -4,13 +4,21 @@ import chess.model.ChessPiece;
 import chess.model.Move;
 import chess.util.Constants;
 
-public class Generator {
+/**
+ * Generator parent class that holds useful methods shared between 2 or more generators.
+ */
+class Generator {
 
-  protected final Move move;
-  protected final int[][] board;
-  protected int[][] validMoves;
+  final Move move;
+  final int[][] board;
+  int[][] validMoves;
 
-  public Generator(Move move, int[][] board) {
+  /**
+   * Constructor taking Move data and current board state
+   * @param move      Move data
+   * @param board     Current board state
+   */
+  Generator(Move move, int[][] board) {
     this.move = move;
     this.board = board;
     validMoves = new int[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
@@ -22,7 +30,11 @@ public class Generator {
    * @param y               Y coordinate
    * @return                -1 to break, 1 if valid move, 2 if valid move and can attack
    */
-  protected int analyzePath(int x, int y) {
+  int analyzePath(int x, int y) {
+    if(x > 7 || y > 7) {
+      return -1;
+    }
+
     ChessPiece chessPiece = null;
 
     if(board[y][x] != 0) {
@@ -50,7 +62,7 @@ public class Generator {
    * @param y   Y coordinate
    * @return    If the generator should stop
    */
-  protected boolean shouldGeneratorStop(int n, int x, int y) {
+  boolean shouldGeneratorStop(int n, int x, int y) {
     if(n == 1) {
       validMoves[y][x] = 1;
     } else if (n == 2) {
@@ -63,7 +75,26 @@ public class Generator {
     return false;
   }
 
-  protected boolean isInBounds(int n, int lowerBound, int upperBound) {
-    return lowerBound <= n && n < upperBound;
+  /**
+   * Makes sure a number is bounded in the board array
+   * @param n   Number to be checked
+   * @return    True if number is bounded, false if not.
+   */
+  boolean isInBounds(int n) {
+    return 0 <= n && n < Constants.BOARD_WIDTH;
+  }
+
+  /**
+   * Checks if the overlay is on top of positions and corrects validMoves if so.
+   * @param x   X coordinate
+   * @param y   Y coordinate
+   */
+  void checkOverlayWithBoard(int x, int y) {
+    int possible = analyzePath(x, y);
+    if(possible == -1) {
+      validMoves[y][x] = 0;
+    } else if(possible == 2) {
+      validMoves[y][x] = 2;
+    }
   }
 }
