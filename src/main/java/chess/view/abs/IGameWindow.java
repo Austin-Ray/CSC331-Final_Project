@@ -27,4 +27,10 @@ public interface IGameWindow {
    * @param newBoard        New game board
    */
   void updateBoard(int[][] newBoard);
+
+  /**
+   * Ends the game
+   * @param winner    0 if white, 1 if black
+   */
+  void endGame(int winner);
 }

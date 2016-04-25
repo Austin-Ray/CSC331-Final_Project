@@ -55,4 +55,12 @@ public class GameWindowPresenter implements IGameWindowPresenter {
     // Tell the window to display the valid moves
     window.displayValidMoves(validMoves);
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void endGame(int[][] newBoard, int winner) {
+    window.updateBoard(newBoard);
+    window.endGame(winner);
+  }
 }

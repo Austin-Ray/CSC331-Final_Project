@@ -35,4 +35,10 @@ public interface IGameWindowPresenter {
      * @param chessPieceId      Id of chess piece
      */
     void requestValidMoves(int[] point, int chessPieceId);
+
+  /**
+   * Ends the game.
+   * @param newBoard    Last board update
+   */
+  void endGame(int[][] newBoard, int winner);
 }

@@ -5,6 +5,9 @@ import chess.presenter.abs.IGameWindowPresenter;
 import chess.util.Constants;
 import chess.util.MoveValidator;
 import chess.util.ValidMoveGenerator;
+import java.awt.Color;
+
+import static chess.model.ChessPiece.Type.PAWN;
 
 /**
  * Handles all the logic of the chess game.
@@ -73,8 +76,12 @@ public class GameManager implements IGameManager {
     
     //Test Commit
 
-    // Tell the presenter to update the GameWindow.
-    presenter.updateBoard(board);
+    if(ready) {
+      // Tell the presenter to update the GameWindow.
+      presenter.updateBoard(board);
+    } else {
+      presenter.endGame(board, turn);
+    }
   }
 
   /**
@@ -93,7 +100,23 @@ public class GameManager implements IGameManager {
 
     // Place a zero where the piece was, and put the piece ID at the new location.
     board[originY][originX] = 0;
-    board[newY][newX] = move.getPieceId();
+
+    // Check if a Pawn can become a Queen
+    if(move.getPieceType() == PAWN) {
+      if(move.getPieceColor() == Color.WHITE &&
+          move.getPointB()[1] == 7) {
+        board[newY][newX] = 14;
+      } else if(move.getPieceColor() == Color.BLACK &&
+          move.getPointB()[1] == 1) {
+        board[newY][newX] = 24;
+      }
+    } else {
+      if(board[newY][newX] == 15 || board[newY][newX] == 25) {
+        board[newY][newX] = move.getPieceId();
+        ready = false;
+        return;
+      }
+    }
 
     // Change the turn to the other player
     switch(turn) {
@@ -112,6 +135,10 @@ public class GameManager implements IGameManager {
   @Override
   public int[][] getValidMoves(Move move) {
     return ValidMoveGenerator.generateMoves(move, board, turn);
+  }
+
+  private void endGame(int turn) {
+
   }
 
   /**

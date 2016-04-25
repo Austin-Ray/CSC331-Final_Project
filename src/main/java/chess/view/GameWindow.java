@@ -45,5 +45,13 @@ public class GameWindow implements IGameWindow {
    */
   @Override public void updateBoard(int[][] newBoard) {
 
-    }
+  }
+
+  /**
+   * {@inheritDoc}
+   * @param winner    0 if white, 1 if black
+   */
+  @Override public void endGame(int winner) {
+
+  }
 }
