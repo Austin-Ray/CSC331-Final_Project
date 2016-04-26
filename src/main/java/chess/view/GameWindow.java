@@ -215,22 +215,28 @@ public class GameWindow extends JFrame implements IGameWindow {
       switch(type) {
         case PAWN:
           return color == Color.WHITE ?
-              new ImageIcon("res/pawn_white.png") : new ImageIcon("res/pawn_black.png");
+              new ImageIcon(getClass().getResource("/res/pawn_white.png")) :
+              new ImageIcon(getClass().getResource("/res/pawn_black.png"));
         case ROOK:
           return color == Color.WHITE ?
-              new ImageIcon("res/rook_white.png") : new ImageIcon("res/rook_black.png");
+              new ImageIcon(getClass().getResource("/res/rook_white.png")) :
+              new ImageIcon(getClass().getResource("/res/rook_black.png"));
         case BISHOP:
           return color == Color.WHITE ?
-              new ImageIcon("res/bishop_white.png") : new ImageIcon("res/bishop_black.png");
+              new ImageIcon(getClass().getResource("/res/bishop_white.png")) :
+              new ImageIcon(getClass().getResource("/res/bishop_black.png"));
         case KNIGHT:
           return color == Color.WHITE ?
-              new ImageIcon("res/knight_white.png") : new ImageIcon("res/knight_black.png");
+              new ImageIcon(getClass().getResource("/res/knight_white.png")) :
+              new ImageIcon(getClass().getResource("/res/knight_black.png"));
         case QUEEN:
           return color == Color.WHITE ?
-              new ImageIcon("res/queen_white.png") : new ImageIcon("res/queen_black.png");
+              new ImageIcon(getClass().getResource("/res/queen_white.png")) :
+              new ImageIcon(getClass().getResource("/res/queen_black.png"));
         case KING:
           return color == Color.WHITE ?
-              new ImageIcon("res/king_white.png") : new ImageIcon("res/king_black.png");
+              new ImageIcon(getClass().getResource("/res/king_white.png")) :
+              new ImageIcon(getClass().getResource("/res/king_black.png"));
         default:
           return null;
       }
