@@ -103,3 +103,8 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+
+# Remove binary files
+build/
+META-INF/
+.gradle/2.12/taskArtifacts
